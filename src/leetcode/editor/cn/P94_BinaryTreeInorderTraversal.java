@@ -52,7 +52,32 @@ import java.util.*;
 public class P94_BinaryTreeInorderTraversal {
     public static void main(String[] args) {
         //测试代码
+
         Solution solution = new P94_BinaryTreeInorderTraversal().new Solution();
+        TreeNode n1 = new P94_BinaryTreeInorderTraversal().new TreeNode(1);
+        TreeNode n2 = new P94_BinaryTreeInorderTraversal().new TreeNode(2);
+        TreeNode n3 = new P94_BinaryTreeInorderTraversal().new TreeNode(3);
+        TreeNode n4 = new P94_BinaryTreeInorderTraversal().new TreeNode(4);
+        TreeNode n5 = new P94_BinaryTreeInorderTraversal().new TreeNode(5);
+        TreeNode n6 = new P94_BinaryTreeInorderTraversal().new TreeNode(6);
+        TreeNode n7 = new P94_BinaryTreeInorderTraversal().new TreeNode(7);
+        TreeNode n8 = new P94_BinaryTreeInorderTraversal().new TreeNode(8);
+        TreeNode n9 = new P94_BinaryTreeInorderTraversal().new TreeNode(9);
+        TreeNode n10 = new P94_BinaryTreeInorderTraversal().new TreeNode(10);
+        TreeNode n11 = new P94_BinaryTreeInorderTraversal().new TreeNode(11);
+        n1.left = n2;
+        n1.right = n3;
+        n2.left = n4;
+        n2.right = n5;
+        n4.left = n8;
+        n4.right = n9;
+        n5.left = n10;
+        n5.right = n11;
+        n1.right = n3;
+        n3.left = n6;
+        n3.right = n7;
+
+        solution.inorderTraversal(n1);
     }
 
 //力扣代码
@@ -94,7 +119,11 @@ public class P94_BinaryTreeInorderTraversal {
 
     class Solution {
         public List<Integer> inorderTraversal(TreeNode root) {
-//             递归
+            // morris 遍历
+            return inorderTraversalLoop(root);
+        }
+
+        public List<Integer> inorderTraversalRecursion(TreeNode root) {
             List<Integer> list = new ArrayList<>();
 
             if(root == null) {
@@ -109,7 +138,46 @@ public class P94_BinaryTreeInorderTraversal {
                 list.addAll(inorderTraversal(root.right));
             }
             return list;
+        }
 
+        public List<Integer> inorderTraversalLoop(TreeNode root) {
+            Stack<TreeNode> temp = new Stack<>();
+            List<Integer> list = new ArrayList<>();
+            // 1
+            while(root != null || !temp.isEmpty()) {
+                while (root != null) {
+                    temp.push(root);
+                    root = root.left;
+                }
+                TreeNode cur = temp.pop();
+                list.add(cur.val);
+                root = cur.right;
+            }
+
+
+            // 2
+            /* while(root != null || !temp.isEmpty()) {
+                if(root != null) {
+                    temp.push(root);
+                    root = root.left;
+                } else {
+                    root = temp.pop();
+                    list.add(root.val);
+                    root = root.right;
+                }
+            }
+            */
+
+            return list;
+        }
+
+        public List<Integer> inorderTraversalMorris(TreeNode root) {
+            Stack<TreeNode> temp = new Stack<>();
+            List<Integer> list = new ArrayList<>();
+            TreeNode current = root;
+            TreeNode mostRight;
+            //TODO
+            return list;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
