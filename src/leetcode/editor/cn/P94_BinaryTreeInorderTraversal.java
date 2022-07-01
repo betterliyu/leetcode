@@ -120,65 +120,121 @@ public class P94_BinaryTreeInorderTraversal {
     class Solution {
         public List<Integer> inorderTraversal(TreeNode root) {
             // morris 遍历
-            return inorderTraversalLoop(root);
+            return inorderTraversalMorris(root);
         }
 
-        public List<Integer> inorderTraversalRecursion(TreeNode root) {
-            List<Integer> list = new ArrayList<>();
-
-            if(root == null) {
-                return list;
-            }
-
-            if(root.left != null) {
-                list.addAll(inorderTraversal(root.left));
-            }
-            list.add(root.val);
-            if(root.right != null) {
-                list.addAll(inorderTraversal(root.right));
-            }
-            return list;
-        }
-
-        public List<Integer> inorderTraversalLoop(TreeNode root) {
-            Stack<TreeNode> temp = new Stack<>();
-            List<Integer> list = new ArrayList<>();
-            // 1
-            while(root != null || !temp.isEmpty()) {
-                while (root != null) {
-                    temp.push(root);
-                    root = root.left;
-                }
-                TreeNode cur = temp.pop();
-                list.add(cur.val);
-                root = cur.right;
-            }
-
-
-            // 2
-            /* while(root != null || !temp.isEmpty()) {
-                if(root != null) {
-                    temp.push(root);
-                    root = root.left;
-                } else {
-                    root = temp.pop();
-                    list.add(root.val);
-                    root = root.right;
-                }
-            }
-            */
-
-            return list;
-        }
+//        public List<Integer> inorderTraversalRecursion(TreeNode root) {
+//            List<Integer> list = new ArrayList<>();
+//
+//            if (root == null) {
+//                return list;
+//            }
+//114
+//            if (root.left != null) {
+//                list.addAll(inorderTraversal(root.left));
+//            }
+//            list.add(root.val);
+//            if (root.right != null) {
+//                list.addAll(inorderTraversal(root.right));
+//            }
+//            return list;
+//        }
+//
+//        public List<Integer> inorderTraversalLoop(TreeNode root) {
+//            Stack<TreeNode> temp = new Stack<>();
+//            List<Integer> list = new ArrayList<>();
+//            // 1
+//            while (root != null || !temp.isEmpty()) {
+//                while (root != null) {
+//                    temp.push(root);
+//                    root = root.left;
+//                }
+//                TreeNode cur = temp.pop();
+//                list.add(cur.val);
+//                root = cur.right;
+//            }
+//
+//
+//            // 2
+//            /* while(root != null || !temp.isEmpty()) {
+//                if(root != null) {
+//                    temp.push(root);
+//                    root = root.left;
+//                } else {
+//                    root = temp.pop();
+//                    list.add(root.val);
+//                    root = root.right;
+//                }
+//            }
+//            */
+//
+//            return list;
+//        }
 
         public List<Integer> inorderTraversalMorris(TreeNode root) {
-            Stack<TreeNode> temp = new Stack<>();
             List<Integer> list = new ArrayList<>();
             TreeNode current = root;
             TreeNode mostRight;
-            //TODO
+            while (current != null) {
+                if (current.left != null) {
+                    mostRight = current.left;
+                    while (mostRight.right != null && mostRight.right != current) {
+                        mostRight = mostRight.right;
+                    }
+                    if (mostRight.right == null) {
+                        mostRight.right = current;
+                        current = current.left;
+                        continue;
+                    } else {
+                        mostRight.right = null;
+                        list.add(current.val);
+                    }
+                } else {
+                    list.add(current.val);
+                }
+                current = current.right;
+            }
+
             return list;
         }
+
+//        // 后序遍历方法
+//        private List<Integer> printEdge(TreeNode root) {
+//            TreeNode cur = reverseNode(root);
+//            TreeNode prev = null;
+//            List<Integer> list = new ArrayList<>();
+//            list.add(cur.val);
+//            System.out.println(cur.val);
+//            while (cur.right != null) {
+//                prev = cur;
+//                cur = cur.right;
+//                if(cur != null) {
+//                    list.add(cur.val);
+//                    System.out.println(cur.val);
+//                }
+//            }
+//            if (root.right != null) {
+//                reverseNode(prev);
+//            }
+//
+//            return list;
+//        }
+//
+//        private TreeNode reverseNode(TreeNode root) {
+//            if (root.right == null) {
+//                return root;
+//            }
+//            TreeNode current = root;
+//            TreeNode next = null;
+//            TreeNode prev = null;
+//            while (current != null) {
+//                next = current.right;
+//                current.right = prev;
+//                prev = current;
+//                current = next;
+//            }
+//            return prev;
+//        }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
