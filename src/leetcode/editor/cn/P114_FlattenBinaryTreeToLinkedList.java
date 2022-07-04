@@ -57,29 +57,8 @@ public class P114_FlattenBinaryTreeToLinkedList {
         //测试代码
         Solution solution = new P114_FlattenBinaryTreeToLinkedList().new Solution();
 
-
-        solution.flatten(new P114_FlattenBinaryTreeToLinkedList().deSerial(new Integer[]{1,2,null,3}));
     }
 
-
-    public TreeNode deSerial(Integer[] nums) {
-        if (nums.length == 0) return null;
-        //临时节点数组，用于关联各节点之间的父子关系
-        TreeNode[] nodes = new TreeNode[nums.length];
-        //倒序装填节点，方便关联父子引用
-        for (int i = nodes.length - 1; i >= 0; i--) {
-            if (nums[i] != null) {
-                nodes[i] = new TreeNode(nums[i]);
-
-                if (2 * i + 1 < nodes.length)
-                    nodes[i].left = nodes[2 * i + 1];
-                if (2 * i + 2 < nodes.length)
-                    nodes[i].right = nodes[2 * i + 2];
-
-            }
-        }
-        return nodes[0];
-    }
 
 //力扣代码
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -105,49 +84,18 @@ public class P114_FlattenBinaryTreeToLinkedList {
 
     class Solution {
         public void flatten(TreeNode root) {
-
-
-            TreeNode current = root;
-            TreeNode mostRight = null;
-            while (current != null) {
-                if (current.left != null) {
-                    mostRight = current.left;
-                    while (mostRight.right != null && mostRight.right != current) {
+            while (root != null) {
+                if (root.left != null) {
+                    TreeNode mostRight = root.left;
+                    while (mostRight.right != null && mostRight.right != root) {
                         mostRight = mostRight.right;
                     }
-                    if (mostRight.right == null) {
-                        mostRight.right = current;
-                        current = current.left;
-                        continue;
-                    } else {
-                        mostRight.right = null;
 
-                        TreeNode next = current;
-                        TreeNode temp = next;
-                        // TODO
-                        while(next != null) {
-                            next = next.right;
-                            if(next == null || temp != next.left) {
-                                break;
-                            }
-                        }
-
-                        mostRight.right = current.right;
-                    }
+                    mostRight.right = root.right;
+                    root.right = root.left;
+                    root.left = null;
                 }
-                current = current.right;
-
-            }
-
-            current = root;
-            while (current != null && (current.left != null || current.right != null)) {
-                if (current.left != null) {
-                    current.right = current.left;
-                    current.left = null;
-                    current = current.right;
-                } else if (current.right != null) {
-                    current = current.right;
-                }
+                root = root.right;
             }
         }
 
