@@ -3,6 +3,14 @@
   <component name="LeetcodeEditor">
     <option name="projectConfig">
       <map>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/cn/P114_FlattenBinaryTreeToLinkedList.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/cn/P114_FlattenBinaryTreeToLinkedList.java" />
+              <option name="questionId" value="114" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/leetcode/editor/cn/P128_LongestConsecutiveSequence.java">
           <value>
             <LeetcodeEditor>
@@ -80,6 +88,22 @@
             <LeetcodeEditor>
               <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/cn/P2_AddTwoNumbers.java" />
               <option name="questionId" value="2" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/cn/P71_SimplifyPath.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/cn/P71_SimplifyPath.java" />
+              <option name="questionId" value="71" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/leetcode/editor/cn/P94_BinaryTreeInorderTraversal.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/src/leetcode/editor/cn/P94_BinaryTreeInorderTraversal.java" />
+              <option name="questionId" value="94" />
             </LeetcodeEditor>
           </value>
         </entry>
